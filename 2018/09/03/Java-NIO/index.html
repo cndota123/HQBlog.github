@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Java NIO | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I/O模型I/O通常指计算机中数据的输入和输出，一般涉及到网络和CPU、CPU与存储器之间或其他种类的数据交互，为了解决由于输入端和输出端的速度或者同步而产生问题而诞生一些I/O模型。 5种模型在《Unix网络编程》中提到了5种I/O模型。  阻塞IO模型：  当用户线程发起I/O请求之后，内核会查看数据是否就绪，如果没有就等待数据就绪，用户线程处于阻塞状态，交出cpu，数据就绪之后，内核将数据拷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java NIO">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/Java-NIO/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="I/O模型I/O通常指计算机中数据的输入和输出，一般涉及到网络和CPU、CPU与存储器之间或其他种类的数据交互，为了解决由于输入端和输出端的速度或者同步而产生问题而诞生一些I/O模型。 5种模型在《Unix网络编程》中提到了5种I/O模型。  阻塞IO模型：  当用户线程发起I/O请求之后，内核会查看数据是否就绪，如果没有就等待数据就绪，用户线程处于阻塞状态，交出cpu，数据就绪之后，内核将数据拷">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-06T14:02:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java NIO">
+<meta name="twitter:description" content="I/O模型I/O通常指计算机中数据的输入和输出，一般涉及到网络和CPU、CPU与存储器之间或其他种类的数据交互，为了解决由于输入端和输出端的速度或者同步而产生问题而诞生一些I/O模型。 5种模型在《Unix网络编程》中提到了5种I/O模型。  阻塞IO模型：  当用户线程发起I/O请求之后，内核会查看数据是否就绪，如果没有就等待数据就绪，用户线程处于阻塞状态，交出cpu，数据就绪之后，内核将数据拷">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java-NIO" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/03/Java-NIO/" class="article-date">
+  <time datetime="2018-09-03T14:30:14.000Z" itemprop="datePublished">2018-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java NIO
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="I-O模型"><a href="#I-O模型" class="headerlink" title="I/O模型"></a>I/O模型</h2><p>I/O通常指计算机中数据的输入和输出，一般涉及到网络和CPU、CPU与存储器之间或其他种类的数据交互，为了解决由于输入端和输出端的速度或者同步而产生问题而诞生一些I/O模型。</p>
+<h3 id="5种模型"><a href="#5种模型" class="headerlink" title="5种模型"></a>5种模型</h3><p>在《Unix网络编程》中提到了5种I/O模型。</p>
+<ul>
+<li><p>阻塞IO模型：<br>  当用户线程发起I/O请求之后，内核会查看数据是否就绪，如果没有就等待数据就绪，用户线程处于阻塞状态，交出cpu，数据就绪之后，内核将数据拷贝给用户线程并返回结果，用户线程解除阻塞状态。</p>
+</li>
+<li><p>非阻塞IO模型<br>  用户线程发起I/O请求之后立刻返回结果来得知数据是否就绪，如果未就绪循环发起请求，当内核准备好数据后，再次得到请求就会将数据返回给用户线程。但是这种模型不释放cpu，cpu占用率高。</p>
+</li>
+<li><p>多路复用IO模型<br>  在多路复用IO模型中，有一个线程不断去轮询多个socket状态，只有当socket真正有读写事件，才真正调用实际的I/O操作，只用一个线程管理socket，减少线程创建维护销毁的开销，相对于非阻塞IO模型，通过一个专门的线程轮询效率更高。不过对于IO事件是逐一响应，当事件响应体很大时会影响后续事件响应。</p>
+</li>
+<li><p>信号驱动IO模型<br>  用户发起一个I/O请求，会给对应的socket注册一个信号函数，然后用户线程会继续执行，当数据就绪时内核发送一个信号给用户线程，然后用户进程在信号函数中进行I/O操作。</p>
+</li>
+<li><p>异步IO模型<br>  用户线程发起I/O请求之后就可以执行其他任务，内核收到I/O请求之后立刻返回请求已经成功发起，然后内核在数据就绪后拷贝到用户线程并通知用户线程已经完成了I/O操作，用户线程就可以使用这些数据了。这种IO模型需要操作系统支持。</p>
+</li>
+</ul>
+<p>这5中模型中，前四种都属于同步IO,最后一种是异步IO，因为在前四种内核将数据拷贝到用户进程时都会阻塞用户进程。(java 7提供了Asynchronous IO)</p>
+<h3 id="JAVA-NIO"><a href="#JAVA-NIO" class="headerlink" title="JAVA NIO"></a>JAVA NIO</h3><p>java NIO是java 4提供的I/O新API。java NIO就是基于上述多路复用IO模型。</p>
+<h4 id="NIO中的重要概念"><a href="#NIO中的重要概念" class="headerlink" title="NIO中的重要概念"></a>NIO中的重要概念</h4><ul>
+<li><p>Channel(通道)：传统IO中stream是单向的，例如java InputStream只能读，OutputStream只能写，channel是双向既可以读也可以写。</p>
+</li>
+<li><p>Buffer(缓冲区)：NIO中读写的数据都放在Buffer中。</p>
+</li>
+<li><p>Selector(选择器)：Selector用来轮询每个注册的Channel，有IO事件发生便对相应Channel进行处理。</p>
+</li>
+</ul>
+<h4 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h4><p>和InputStream，OutputStream一样java也提供了多种channel，常用的有：</p>
+<ul>
+<li>FileChannel，文件的读写。</li>
+<li>SocketChannel，TCP通信数据的读写。</li>
+<li>ServerSocketChannel，监听客户端发起TCP连接为每一个TCP连接创建一个SocketChannel来进行数据读写。</li>
+<li>DatagramChannel，UDP通信数据的读写。<br>下面是一个通过FileChannel来读写文件内容的demo<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"test.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> hasFile = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">if</span> (!file.exists())&#123;</span><br><span class="line">    hasFile = file.createNewFile();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (hasFile) &#123;</span><br><span class="line">    FileOutputStream outputStream = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">    FileChannel channel = outputStream.getChannel();</span><br><span class="line">    ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    String txt = <span class="string">"one two three"</span>;</span><br><span class="line">    byteBuffer.put(txt.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">    byteBuffer.flip();</span><br><span class="line">    channel.write(byteBuffer);</span><br><span class="line">    byteBuffer.compact();</span><br><span class="line">    byteBuffer.put(<span class="string">"123"</span>.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">    FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">    channel = inputStream.getChannel();</span><br><span class="line">    channel.read(byteBuffer);</span><br><span class="line">    System.out.printf(<span class="keyword">new</span> String(byteBuffer.array()));</span><br><span class="line">    channel.close();</span><br><span class="line">    inputStream.close();</span><br><span class="line">    outputStream.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h4><p>一个用于特定基本类型的容器，java NIO中所有缓冲区实现类继承自Buffer这个抽象类，常用子类有ByteBuffer、CharBuffer、ShortBuffer、IntBuffer、LongBuffer、FloatBuffer、DoubleBuffer。<br>Buffer的作用是将channel数据读到buffer中或者将Buffer数据写入Channel中。</p>
+<h5 id="Buffer重要概念"><a href="#Buffer重要概念" class="headerlink" title="Buffer重要概念"></a>Buffer重要概念</h5><ul>
+<li><p>capacity：容量，表示缓冲区容量，不能为负，且创建后不能更改</p>
+</li>
+<li><p>limit：索引中limit之后的数据不可读写</p>
+</li>
+<li><p>position：下一个要做读写操作的索引。</p>
+</li>
+<li><p>mark：标记后的索引，可以通过reset方法恢复position到这里。</p>
+</li>
+</ul>
+<p>以上四种属性需要满足：mark&lt;=position&lt;=limit&lt;=capacity。</p>
+<h5 id="Buffer的创建"><a href="#Buffer的创建" class="headerlink" title="Buffer的创建"></a>Buffer的创建</h5><ul>
+<li><p>非直接创建：ByteBuffer byteBuffer = ByteBuffer.allocate(1024); //大小是1024个字节，创建后position=0，limit=1024,capacity=1024</p>
+</li>
+<li><p>直接创建：ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);</p>
+</li>
+<li><p>wrap方法：char[] charArray = new char[10]; CharBuffer charBuffer = CharBuffer.wrap(charArray);</p>
+</li>
+</ul>
+<p>第一种内存开销发生在jvm中，第二种内存是系统分配。java程序在获取外部数据会由系统拷贝给jvm，第二种方法避免了这个操作，但是系统内存分配更耗时，所以缓冲区越大第一种效率越高，通常可以直接使用第一种，第三种相对前两种最大的区别是他的内存空间是别人提供的，二者数据的变动互相影响。</p>
+<h5 id="Buffer的复制"><a href="#Buffer的复制" class="headerlink" title="Buffer的复制"></a>Buffer的复制</h5><ul>
+<li><p>duplicate方法：浅拷贝，两个缓冲区共享数据，基础属性互相独立。</p>
+</li>
+<li><p>asReadOnlyBuffer方法：生成一个只读缓冲区，基本和duplicate方法一致</p>
+</li>
+<li><p>slice方法：分割缓冲区，新缓冲区和原缓冲区共享剩余空间，capacity(新)=limit(原)-position(原)</p>
+</li>
+</ul>
+<h5 id="Buffer的操作"><a href="#Buffer的操作" class="headerlink" title="Buffer的操作"></a>Buffer的操作</h5><ul>
+<li><p>读写：get()读，put()写</p>
+</li>
+<li><p>remaining():返回剩余空间大小(limit-position)</p>
+</li>
+<li><p>hasRemaining():返回从当前位置到上界有没有数据</p>
+</li>
+<li><p>flip():翻转，切换为读就绪状态，在channel读buffer数据前使用</p>
+</li>
+<li><p>compact():压缩，丢弃已经读取过的数据，将保留的数据填充到顶部</p>
+</li>
+<li><p>mark():标记，mark=position。</p>
+</li>
+<li><p>比较：equals(),compareTo(),都有Buffer实现，前者允许比较不同类型Buffer，后者不行</p>
+</li>
+</ul>
+<h4 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h4><p>Selector是SelectableChannel的多路复用器，继承SelectableChannel可以注册在Selector上由Selector监控。<br>Channel注册在Selector时返回一个SelectionKey对象，有如下属性</p>
+<ul>
+<li>interestSet，事件集合</li>
+<li>ready集合，已就绪通道集合</li>
+<li>Channel</li>
+<li>Selector</li>
+<li>附加的对象（可选），可以在注册时绑定，也可以用attach()方法，绑定的对象可以用attachment()方法取出。注意这个对象垃圾回收器不会回收一旦不使用就清楚。</li>
+</ul>
+<h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h5><ul>
+<li>SelectionKey.OP_CONNECT(1),连接</li>
+<li>SelectionKey.OP_ACCEPT(4),接收</li>
+<li>SelectionKey.OP_READ(8),读</li>
+<li>SelectionKey.OP_WRITE(16),写</li>
+</ul>
+<p>多个事件用|连接，例如int key = SelectionKey.OP_CONNECT|SelectionKey.OP_ACCEPT.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断事件是否存在</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="keyword">int</span> interestSet = selectionKey.interestOps();  </span><br><span class="line">	<span class="keyword">boolean</span> isInterestedInAccept  = interestSet &amp; SelectionKey.OP_ACCEPT;</span><br><span class="line">	<span class="keyword">boolean</span> isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT;  </span><br><span class="line">	<span class="keyword">boolean</span> isInterestedInRead    = interestSet &amp; SelectionKey.OP_READ;  </span><br><span class="line">	<span class="keyword">boolean</span> isInterestedInWrite   = interestSet &amp; SelectionKey.OP_WRITE;</span><br></pre></td></tr></table></figure></p>
+<p>也可以用如下方法判断就绪事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">selectionKey.isAcceptable();  </span><br><span class="line">selectionKey.isConnectable();  </span><br><span class="line">selectionKey.isReadable();  </span><br><span class="line">selectionKey.isWritable();</span><br></pre></td></tr></table></figure></p>
+<h5 id="Select方法"><a href="#Select方法" class="headerlink" title="Select方法"></a>Select方法</h5><ul>
+<li>select()：阻塞到至少有一个通道就绪。</li>
+<li>select(long timeout):同上，但是最长阻塞时间为timeout毫秒</li>
+<li>selectNow():非阻塞，只要有通道就绪就立刻返回。<br>select()方法返回的int值表示有多少通道已经就绪,是自上次调用select()方法后有多少通道变成就绪状态。</li>
+</ul>
+<h4 id="JAVA-NIO实现socket通信"><a href="#JAVA-NIO实现socket通信" class="headerlink" title="JAVA NIO实现socket通信"></a>JAVA NIO实现socket通信</h4><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/dolphin0520/p/3919162.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3919162.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/03/Java-NIO/" data-id="cjoi98zo70004nww75r1owpt3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/06/TCP-IP协议/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TCP/IP协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/29/池技术/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">池技术</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/java类加载和实例化中对象加载顺序/">java类加载和实例化中对象加载顺序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/06/TCP-IP协议/">TCP/IP协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/03/Java-NIO/">Java NIO</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/29/池技术/">池技术</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

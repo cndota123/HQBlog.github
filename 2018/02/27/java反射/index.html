@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>java反射 | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java反射">
+<meta property="og:url" content="http://yoursite.com/2018/02/27/java反射/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-28T05:31:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java反射">
+<meta name="twitter:description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java反射" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/27/java反射/" class="article-date">
+  <time datetime="2018-02-27T09:02:32.000Z" itemprop="datePublished">2018-02-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java反射
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p>Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。</p>
+<h2 id="反射的使用"><a href="#反射的使用" class="headerlink" title="反射的使用"></a>反射的使用</h2><p>首先获取class对象（在运行是，一个类只有一个class对象）：<br>获取class对象三种方式</p>
+<ol>
+<li>getClass方法（继承自object）</li>
+<li>任何数据类型（包括基础数据类型）都有一个静态的class属性</li>
+<li>通过Class类的静态方法：forName（String className）<br>以下上述方式的实现</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A a = new A();</span><br><span class="line">Class a1 = a.getClass();</span><br><span class="line"></span><br><span class="line">Class a2 = A.class;</span><br><span class="line"></span><br><span class="line">Class a3 = Class.forName(&quot;A的路径&quot;);</span><br></pre></td></tr></table></figure>
+<p>三种方法第一种已经有了类的对象不需要反射，第二种需要导入类的包，实用性差，所以通常用第三种方法。</p>
+<h3 id="反射获取构造方法并使用"><a href="#反射获取构造方法并使用" class="headerlink" title="反射获取构造方法并使用"></a>反射获取构造方法并使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a = Class.forName(&quot;A&quot;);</span><br><span class="line">//获取所有public构造方法</span><br><span class="line">Constructor[] conArray = a.getConstructors();</span><br><span class="line">//获取所有构造方法</span><br><span class="line">conArray = a.getDeclaredConstructors();</span><br><span class="line"></span><br><span class="line">//getConstructor方法的参数是想要获取的构造方法的参数类型</span><br><span class="line">//获取public构造方法且参数为null（无参）</span><br><span class="line">Constructor con = a.getConstructor(null);</span><br><span class="line">//获取参数数据类型为char的构造方法</span><br><span class="line">con = a.getDeclaredConstructor(char.class)</span><br><span class="line"></span><br><span class="line">//使用</span><br><span class="line">Object obj = con.newInstance(&quot; &quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="反射获取成员变量"><a href="#反射获取成员变量" class="headerlink" title="反射获取成员变量"></a>反射获取成员变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a = Class.forName(&quot;A&quot;);</span><br><span class="line">//获取所有public字段</span><br><span class="line">Field[] fields = a.getFields();</span><br><span class="line">//获取所有字段</span><br><span class="line">fields = a.getDeclaredFields();</span><br><span class="line">//根据字段名获取public字段</span><br><span class="line">Field field = a.getField(&quot;Field&apos;s name&quot;);</span><br><span class="line">//根据字段名获取字段</span><br><span class="line">field = a.getDeclaredField(&quot;Field&apos;s name&quot;);</span><br><span class="line">//设置字段值</span><br><span class="line">Object obj = a.getConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">f.setAccessible(true);//暴力反射，解除私有锁定</span><br><span class="line">field.set(obj,&quot;abc&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="获取成员方法并调用"><a href="#获取成员方法并调用" class="headerlink" title="获取成员方法并调用"></a>获取成员方法并调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class a = Class.forName(&quot;A&quot;);</span><br><span class="line">//获取所有public方法</span><br><span class="line">Method[] methods = a.getMethods();</span><br><span class="line">//获取所有方法</span><br><span class="line">methods = a.getDeclaredMethods();</span><br><span class="line">//根据方法名和方法参数类型（例如String）获取public方法</span><br><span class="line">Method method = a.getMethod(&quot;Method&apos;s name&quot;,String.class)</span><br><span class="line">//获取方法不限public</span><br><span class="line">method = a.getDeclaredMethod(&quot;Method&apos;s name&quot;,String.class)</span><br><span class="line">//调用</span><br><span class="line">Object obj = a.getConstructor().newInstance();</span><br><span class="line">method.setAccessible(true);//解除私有锁定</span><br><span class="line">method.invoke(obj,&quot; &quot;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/27/java反射/" data-id="cjoi98zoo000knww7401ug0za" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/27/正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/02/Spring-aop/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring-aop</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/java类加载和实例化中对象加载顺序/">java类加载和实例化中对象加载顺序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/06/TCP-IP协议/">TCP/IP协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/03/Java-NIO/">Java NIO</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/29/池技术/">池技术</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
