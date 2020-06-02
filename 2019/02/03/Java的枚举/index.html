@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>java的枚举 | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="枚举是java5之后引入java的。 枚举的实现原理12345678910public enum testEnum &amp;#123;    ADD(&amp;quot;add&amp;quot;, 1), MOD(&amp;quot;mod&amp;quot;, 2);    private String name;    private int index;    testEnum(String name, int index)">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java的枚举">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/Java的枚举/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="枚举是java5之后引入java的。 枚举的实现原理12345678910public enum testEnum &amp;#123;    ADD(&amp;quot;add&amp;quot;, 1), MOD(&amp;quot;mod&amp;quot;, 2);    private String name;    private int index;    testEnum(String name, int index)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-14T16:45:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java的枚举">
+<meta name="twitter:description" content="枚举是java5之后引入java的。 枚举的实现原理12345678910public enum testEnum &amp;#123;    ADD(&amp;quot;add&amp;quot;, 1), MOD(&amp;quot;mod&amp;quot;, 2);    private String name;    private int index;    testEnum(String name, int index)">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java的枚举" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/03/Java的枚举/" class="article-date">
+  <time datetime="2019-02-03T07:27:12.000Z" itemprop="datePublished">2019-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java的枚举
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>枚举是java5之后引入java的。</p>
+<h4 id="枚举的实现原理"><a href="#枚举的实现原理" class="headerlink" title="枚举的实现原理"></a>枚举的实现原理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public enum testEnum &#123;</span><br><span class="line"></span><br><span class="line">    ADD(&quot;add&quot;, 1), MOD(&quot;mod&quot;, 2);</span><br><span class="line">    private String name;</span><br><span class="line">    private int index;</span><br><span class="line">    testEnum(String name, int index) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.index = index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述是一个常见自定义枚举类，通过javap指令将这个枚举类反编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final class testEnum extends java.lang.Enum&lt;testEnum&gt; &#123;</span><br><span class="line">  public static final testEnum ADD;</span><br><span class="line">  public static final testEnum MOD;</span><br><span class="line">  public static testEnum[] values();</span><br><span class="line">  public static testEnum valueOf(java.lang.String);</span><br><span class="line">  static &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可见继承了Enum这个抽象类，并且添加了两个方法一个values一个valueOf，而且testEnum持有了两个静态final的testEnum实例ADD和MOD，这恰好是我们定义的两个枚举数据。所以其实每个枚举数据都是这个枚举类型的一个实例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt; implements Comparable&lt;E&gt;, Serializable &#123;</span><br><span class="line">    private final String name;</span><br><span class="line">    private final int ordinal;</span><br><span class="line"></span><br><span class="line">    public final String name() &#123;</span><br><span class="line">        return this.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final int ordinal() &#123;</span><br><span class="line">        return this.ordinal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected Enum(String var1, int var2) &#123;</span><br><span class="line">        this.name = var1;</span><br><span class="line">        this.ordinal = var2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return this.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final boolean equals(Object var1) &#123;</span><br><span class="line">        return this == var1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final int hashCode() &#123;</span><br><span class="line">        return super.hashCode();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected final Object clone() throws CloneNotSupportedException &#123;</span><br><span class="line">        throw new CloneNotSupportedException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final int compareTo(E var1) &#123;</span><br><span class="line">        if (this.getClass() != var1.getClass() &amp;&amp; this.getDeclaringClass() != var1.getDeclaringClass()) &#123;</span><br><span class="line">            throw new ClassCastException();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return this.ordinal - var1.ordinal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final Class&lt;E&gt; getDeclaringClass() &#123;</span><br><span class="line">        Class var1 = this.getClass();</span><br><span class="line">        Class var2 = var1.getSuperclass();</span><br><span class="line">        return var2 == Enum.class ? var1 : var2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T extends Enum&lt;T&gt;&gt; T valueOf(Class&lt;T&gt; var0, String var1) &#123;</span><br><span class="line">        Enum var2 = (Enum)var0.enumConstantDirectory().get(var1);</span><br><span class="line">        if (var2 != null) &#123;</span><br><span class="line">            return var2;</span><br><span class="line">        &#125; else if (var1 == null) &#123;</span><br><span class="line">            throw new NullPointerException(&quot;Name is null&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;No enum constant &quot; + var0.getCanonicalName() + &quot;.&quot; + var1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected final void finalize() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void readObject(ObjectInputStream var1) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        throw new InvalidObjectException(&quot;can&apos;t deserialize enum&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void readObjectNoData() throws ObjectStreamException &#123;</span><br><span class="line">        throw new InvalidObjectException(&quot;can&apos;t deserialize enum&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上是Enum抽象类源码，其中有一个name属性，这个属性就是我们自定义枚举类的名字，比如testEnum中的ADD,还有一个属性ordinal，这个就是编译器给我们加上的values方法返回的数组中每个数据的索引，默认从0开始计数。</p>
+<h4 id="枚举的应用"><a href="#枚举的应用" class="headerlink" title="枚举的应用"></a>枚举的应用</h4><ol>
+<li>常量，枚举本身的意义就是数据的有限集，常用于定义一个有限集合供使用者使用，例如注解中的值的集合</li>
+<li>switch表达式<br>这是枚举的核心用法，当然即使作为常量即可简单用name存储数据也可定义更复杂的数据结构比如上述的test就含有两个子数据一个name一个index，并且枚举类本身也是一个类不过他不能继承其他类只能继承接口。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/03/Java的枚举/" data-id="ckaxh3uw90004ykw7688nff4t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/02/Java集合之EnumMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合之EnumMap</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 13.33px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/03/Java的枚举/">java的枚举</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之EnumMap/">Java集合之EnumMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之HashSet/">Java集合之HashSet</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/25/Java集合之HashMap/">Java集合之HashMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/24/Java集合之Vector/">Java集合之Vector</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Java集合之LinkedList | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io.Serializable&amp;#123;&amp;#125; AbstractSequentialList：此类提供的骨干实现">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合之LinkedList">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/Java集合之LinkedList/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="123public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io.Serializable&amp;#123;&amp;#125; AbstractSequentialList：此类提供的骨干实现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-14T16:45:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合之LinkedList">
+<meta name="twitter:description" content="123public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io.Serializable&amp;#123;&amp;#125; AbstractSequentialList：此类提供的骨干实现">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java集合之LinkedList" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/24/Java集合之LinkedList/" class="article-date">
+  <time datetime="2019-01-24T06:49:35.000Z" itemprop="datePublished">2019-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java集合之LinkedList
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class LinkedList&lt;E&gt;</span><br><span class="line">    extends AbstractSequentialList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>AbstractSequentialList：此类提供的骨干实现List界面最小化以实现此接口由“连续访问”数据存储备份所需的工作（如链接列表）。<br>Deque:继承了Quene接口，是支持两端元素插入和移除的线性集合，也就是双端队列，与List接口不同，此接口不支持索引访问元素。<br>由此可以看出LinkedList是一个支持双端操作的list。</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>LinkedList的构造方法很简单，一个无参的构造方法LinkedList()可以初始化一个空的LinkedList，另一个LinkedList(Collection&lt;? extends E&gt; c)初始化一个以已经存在的集合c为内容的LinkedList。<br>LinkedList的底层实现也很简单，Node是LinkedList的一个私有静态内部类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">    private static class Node&lt;E&gt; &#123;</span><br><span class="line">        E item;</span><br><span class="line">        Node&lt;E&gt; next;</span><br><span class="line">        Node&lt;E&gt; prev;</span><br><span class="line"></span><br><span class="line">        Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">            this.item = element;</span><br><span class="line">            this.next = next;</span><br><span class="line">            this.prev = prev;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//add方法</span><br><span class="line">    public boolean add(E e) &#123;</span><br><span class="line">        linkLast(e);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    void linkLast(E e) &#123;</span><br><span class="line">        final Node&lt;E&gt; l = last;</span><br><span class="line">        final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);</span><br><span class="line">        last = newNode;</span><br><span class="line">        if (l == null)</span><br><span class="line">            //如果是空list</span><br><span class="line">            first = newNode;</span><br><span class="line">        else</span><br><span class="line">            l.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>每个node连接前后各一个node，item是每个node内存储的数据。一个空的LinkedList会有一个空的Node first和一个空的Node last分别作为头尾节点。由此可见LinkedList的底层实现是双向链表。</p>
+<h4 id="public方法"><a href="#public方法" class="headerlink" title="public方法"></a>public方法</h4><h5 id="list"><a href="#list" class="headerlink" title="list"></a>list</h5><ul>
+<li>getFirst()：获取头节点的数据。</li>
+<li>getLast()：获取尾节点的数据。</li>
+<li>removeFirst()：删除头节点，头节点后移。</li>
+<li>removeLast()：删除尾节点，尾节点前移。</li>
+<li>addFirst(E e)：头节点前添加节点头节点前移。</li>
+<li>addLast(E e)：尾节点后添加节点尾节点后移。</li>
+<li>contains(Object o)：查询list中是否有o元素，如果有返回true。</li>
+<li>size()：返回list中的元素个数。</li>
+<li>add(E e)：和addLast功能相同。</li>
+<li>remove(Object o)：删除顺序匹配的第一个元素o，成功返回true。</li>
+<li>addAll(Collection&lt;? extends E&gt; c)：从list末尾添加集合c中的所有元素，成功返回true。</li>
+<li>addAll(int index, Collection&lt;? extends E&gt; c)：从index索引后开始添加c中所有元素，成功返回true。</li>
+<li>clear()：重置list为一个空LinkedList。</li>
+<li>get(int index)：获取index位置的数据。</li>
+<li>set(int index, E element)：修改index位置的数据。</li>
+<li>add(int index, E element)：index后添加数据。</li>
+<li>remove(int index)：删除index位置节点。</li>
+<li>indexOf(Object o)：返回从头遍历第一个匹配o的节点索引，未匹配返回-1。</li>
+<li>lastIndexOf(Object o)：和indexOf功能相似只不过是从尾开始遍历。<br>以上LinkedList作为一个List的功能，但是LinkedList也是一个deque(当然deque首先是一个queue)，而且双链表实现deque的功能其实也很简单<h5 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h5></li>
+<li>peek()：获取头节点数据。</li>
+<li>element()：获取头节点数据。</li>
+<li>poll()：头节点出队列(返回头节点数据，头节点为null返回null)。</li>
+<li>remove()：头节点出队列(返回头节点数据，头节点为null抛出NoSuchElementException)</li>
+<li>offer(E e)：队列尾部添加数据，成功返回true。<h5 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h5></li>
+<li>offerFirst(E e)：队列头插入数据，成功返回true。</li>
+<li>offerLast(E e)：队列尾部插入数据，成功返回true。</li>
+<li>peekFirst()：获取头节点数据。</li>
+<li>peekLast()：获取尾部数据。</li>
+<li>pollFirst()：头节点出队列。</li>
+<li>pollLast()：尾节点出队列。</li>
+<li>push(E e)：队列头插入数据。</li>
+<li>pop()：头节点出队列。</li>
+<li>removeFirstOccurrence(Object o)：删除顺序匹配的第一个元素o，成功返回true。</li>
+<li>removeLastOccurrence(Object o)：删除倒序匹配的第一个元素o，成功返回true。</li>
+</ul>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>LinkedList提供了三种迭代器：<br>1.ListItr，继承ListIterator，和ArrayList的ListItr功能相似内部实现不同。<br>2.DescendingIterator，继承Iterator，和ArrayList的Itr功能相似，其实内部就是实现了一个ListItr。<br>3.LLSpliterator，继承Spliterator，提供一个可分割的迭代器。</p>
+<h4 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h4><ul>
+<li><p>LinkedList和ArrayList的应用场景<br>LinkedList通常用来和ArrayList相比较，二者最大区别在于随机访问和顺序访问，从细节上来说，它们的性能差异主要在如下四点：<br>  1.对ArrayList和LinkedList而言，在列表末尾增加一个元素所花的开销都是固定的。对 ArrayList而言，主要是在内部数组中增加一项，指向所添加的元素，偶尔可 能会导致对数组重新进行分配；而对LinkedList而言，这个开销是统一的，分配一个内部Node对象。<br>  2.在ArrayList集合中添加或者删除一个元素时，当前的列表所所有的元素都会被移动。而LinkedList集合中添加或者删除一个元素的开销是固定的。<br>  3.LinkedList集合不支持高效的随机随机访问（RandomAccess），因为可能产生二次项的行为。<br>  4.ArrayList的空间浪费主要体现在在list列表的结尾预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗相当的空间，而且ArrayList底层实现是数组，数组需要连续的内存空间，LinkedList是链表，链表零散的空间即可，LinkedList的空间利用率一般高于ArrayList。<br>所以大致上在读多写少的场景用ArrayList，读少写多的场景用LinkedList</p>
+</li>
+<li><p>LinkedList的线程安全<br>LinkedList的操作不是线程安全的，它和ArrayList相似都只是通过modCount这个字段简单的对于迭代器迭代是做了并行操作的安全判断，但是不可靠。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/24/Java集合之LinkedList/" data-id="ckaxh3uwn000jykw7upwm1jyn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/24/Java中的Clone/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java中的Clone
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/23/Java函数式编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java函数式编程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 13.33px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/03/Java的枚举/">java的枚举</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之EnumMap/">Java集合之EnumMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之HashSet/">Java集合之HashSet</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/25/Java集合之HashMap/">Java集合之HashMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/24/Java集合之Vector/">Java集合之Vector</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

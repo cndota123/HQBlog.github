@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Java集合之EnumMap | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="EnumMap是一个使用Enum即枚举类型作为key的Map的实现，java5之后加入。 构造方法EnumMap提供了三种构造方法。123456789101112131415161718192021222324252627public EnumMap(Class&amp;lt;K&amp;gt; keyType) &amp;#123;    this.keyType = keyType;    keyUniverse =">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合之EnumMap">
+<meta property="og:url" content="http://yoursite.com/2019/02/02/Java集合之EnumMap/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="EnumMap是一个使用Enum即枚举类型作为key的Map的实现，java5之后加入。 构造方法EnumMap提供了三种构造方法。123456789101112131415161718192021222324252627public EnumMap(Class&amp;lt;K&amp;gt; keyType) &amp;#123;    this.keyType = keyType;    keyUniverse =">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-14T16:45:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合之EnumMap">
+<meta name="twitter:description" content="EnumMap是一个使用Enum即枚举类型作为key的Map的实现，java5之后加入。 构造方法EnumMap提供了三种构造方法。123456789101112131415161718192021222324252627public EnumMap(Class&amp;lt;K&amp;gt; keyType) &amp;#123;    this.keyType = keyType;    keyUniverse =">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java集合之EnumMap" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/02/Java集合之EnumMap/" class="article-date">
+  <time datetime="2019-02-02T13:32:45.000Z" itemprop="datePublished">2019-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java集合之EnumMap
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>EnumMap是一个使用Enum即枚举类型作为key的Map的实现，java5之后加入。</p>
+<h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p>EnumMap提供了三种构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public EnumMap(Class&lt;K&gt; keyType) &#123;</span><br><span class="line">    this.keyType = keyType;</span><br><span class="line">    keyUniverse = getKeyUniverse(keyType);</span><br><span class="line">    vals = new Object[keyUniverse.length];</span><br><span class="line">&#125;</span><br><span class="line">public EnumMap(EnumMap&lt;K, ? extends V&gt; m) &#123;</span><br><span class="line">    keyType = m.keyType;</span><br><span class="line">    keyUniverse = m.keyUniverse;</span><br><span class="line">    vals = m.vals.clone();</span><br><span class="line">    size = m.size;</span><br><span class="line">&#125;</span><br><span class="line">public EnumMap(Map&lt;K, ? extends V&gt; m) &#123;</span><br><span class="line">    if (m instanceof EnumMap) &#123;</span><br><span class="line">        EnumMap&lt;K, ? extends V&gt; em = (EnumMap&lt;K, ? extends V&gt;) m;</span><br><span class="line">        keyType = em.keyType;</span><br><span class="line">        keyUniverse = em.keyUniverse;</span><br><span class="line">        vals = em.vals.clone();</span><br><span class="line">        size = em.size;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (m.isEmpty())</span><br><span class="line">            throw new IllegalArgumentException(&quot;Specified map is empty&quot;);</span><br><span class="line">        keyType = m.keySet().iterator().next().getDeclaringClass();</span><br><span class="line">        keyUniverse = getKeyUniverse(keyType);</span><br><span class="line">        vals = new Object[keyUniverse.length];</span><br><span class="line">        putAll(m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>EnumMap(Class<k> keyType)用指定的key类型创建一个EnumMap，EnumMap(EnumMap&lt;K, ? extends V&gt; m)通过现有的EnumMap实例创建一个EnumMap，EnumMap(Map&lt;K, ? extends V&gt; m)通过现有的Map实例创建EnumMap。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private final Class&lt;K&gt; keyType;</span><br><span class="line"></span><br><span class="line">private transient K[] keyUniverse;</span><br><span class="line"></span><br><span class="line">private transient Object[] vals;</span><br><span class="line"></span><br><span class="line">    private static &lt;K extends Enum&lt;K&gt;&gt; K[] getKeyUniverse(Class&lt;K&gt; keyType) &#123;</span><br><span class="line">        return SharedSecrets.getJavaLangAccess()</span><br><span class="line">                                        .getEnumConstantsShared(keyType);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></k></p>
+<p>keyType是一个Class类型变量这个就是key值的枚举。getKeyUniverse这个方法通过SharedSecrets的静态方法getJavaLangAccess获取了一个JavaLangAccess实例，然后获取keyType这个枚举类型的数据数组，keyUniverse这个数组就是存储枚举类型数据的。vals是一个keyUniverse同样长度的数组。</p>
+<h4 id="put"><a href="#put" class="headerlink" title="put"></a>put</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">    typeCheck(key);</span><br><span class="line"></span><br><span class="line">    int index = key.ordinal();</span><br><span class="line">    Object oldValue = vals[index];</span><br><span class="line">    vals[index] = maskNull(value);</span><br><span class="line">    if (oldValue == null)</span><br><span class="line">        size++;</span><br><span class="line">    return unmaskNull(oldValue);</span><br><span class="line">&#125;</span><br><span class="line">private Object maskNull(Object value) &#123;</span><br><span class="line">    return (value == null ? NULL : value);</span><br><span class="line">&#125;</span><br><span class="line">private V unmaskNull(Object value) &#123;</span><br><span class="line">    return (V)(value == NULL ? null : value);</span><br><span class="line">&#125;</span><br><span class="line">private void typeCheck(K key) &#123;</span><br><span class="line">    Class&lt;?&gt; keyClass = key.getClass();</span><br><span class="line">    if (keyClass != keyType &amp;&amp; keyClass.getSuperclass() != keyType)</span><br><span class="line">        throw new ClassCastException(keyClass + &quot; != &quot; + keyType);</span><br><span class="line">&#125;</span><br><span class="line">private static final Object NULL = new Object() &#123;</span><br><span class="line">    public int hashCode() &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;java.util.EnumMap.NULL&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>EnumMap的put操作比较简单，首先类型校验，插入的key值必须是keyType或者keyType的子类，然后通过key.ordinal()获取索引，关于ordinal这里要说下Enum这个类型。<br>Enum类型是java5之后引入的，java中Enum的使用通过enum关键字，通过enum实现的枚举类其实都继承了Enum这个抽象类并且本身是一个final类，其中Enum中有两个实例变量name和ordinal，ordinal从0开始是枚举中数据的索引。<br>所以在EnumMap中key值转换成index值就是取枚举中key的ordinal。<br>在EnumMap中key值不能为null因为枚举中不能加入null值，value值可以为null，value为null时实际数据是一个final变量NULL,它的hashCode返回0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">    return (isValidKey(key) ?</span><br><span class="line">            unmaskNull(vals[((Enum&lt;?&gt;)key).ordinal()]) : null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不过在get中如果值为NULL就会返回null。<br>综上所述EnumMap的底层其实就是一个数组且长度由key值的枚举类型决定，所以我的理解时EnumMap是枚举的一个加强实现，因为他可以自由设置value值。</p>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>同HashMap一样EnumMap也提供了EntrySet，KeySet，Values三个内部集合用于遍历，三者分别有三个迭代器EntryIterator，KeyIterator，ValueIterator并且都继承了EnumMapIterator，而且EnumMap的迭代器没有加入fail-fast功能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/02/Java集合之EnumMap/" data-id="ckaxh3uwc0008ykw7o9s9um0z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/03/Java的枚举/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java的枚举
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/02/Java集合之HashSet/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合之HashSet</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 13.33px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/03/Java的枚举/">java的枚举</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之EnumMap/">Java集合之EnumMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之HashSet/">Java集合之HashSet</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/25/Java集合之HashMap/">Java集合之HashMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/24/Java集合之Vector/">Java集合之Vector</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

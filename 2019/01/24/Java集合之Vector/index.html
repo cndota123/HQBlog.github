@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Java集合之Vector | HQ BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable&amp;#123;&amp;#125; Vector从类的定义上来看和ArrayList十分相似，二者继承的类和接口完全相同。 构造方法">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合之Vector">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/Java集合之Vector/index.html">
+<meta property="og:site_name" content="HQ BLOG">
+<meta property="og:description" content="123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable&amp;#123;&amp;#125; Vector从类的定义上来看和ArrayList十分相似，二者继承的类和接口完全相同。 构造方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-14T16:45:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合之Vector">
+<meta name="twitter:description" content="123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable&amp;#123;&amp;#125; Vector从类的定义上来看和ArrayList十分相似，二者继承的类和接口完全相同。 构造方法">
+  
+    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HQ BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java集合之Vector" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/24/Java集合之Vector/" class="article-date">
+  <time datetime="2019-01-24T12:21:08.000Z" itemprop="datePublished">2019-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java集合之Vector
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>Vector从类的定义上来看和ArrayList十分相似，二者继承的类和接口完全相同。</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>同样先看下Vector的构造方法。Vector提供了四种构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">    super();</span><br><span class="line">    if (initialCapacity &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    this.elementData = new Object[initialCapacity];</span><br><span class="line">    this.capacityIncrement = capacityIncrement;</span><br><span class="line">&#125;</span><br><span class="line">public Vector(int initialCapacity) &#123;</span><br><span class="line">    this(initialCapacity, 0);</span><br><span class="line">&#125;</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line">public Vector(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    elementCount = elementData.length;</span><br><span class="line">    // c.toArray might (incorrectly) not return Object[] (see 6260652)</span><br><span class="line">    if (elementData.getClass() != Object[].class)</span><br><span class="line">        elementData = Arrays.copyOf(elementData, elementCount, Object[].class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>前面三个其实就是参数不同初始化一个空的vector，第四个是通过一个现存集合初始化一个vector。从代码中可以看出一个vector的初始化就是初始化一个数组和一个capacityIncrement参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * The array buffer into which the components of the vector are</span><br><span class="line"> * stored. The capacity of the vector is the length of this array buffer,</span><br><span class="line"> * and is at least large enough to contain all the vector&apos;s elements.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Any array elements following the last element in the Vector are null.</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">protected Object[] elementData;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The amount by which the capacity of the vector is automatically</span><br><span class="line"> * incremented when its size becomes greater than its capacity.  If</span><br><span class="line"> * the capacity increment is less than or equal to zero, the capacity</span><br><span class="line"> * of the vector is doubled each time it needs to grow.</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">protected int capacityIncrement;</span><br></pre></td></tr></table></figure></p>
+<p>结合对应参数的注释，vector的初始化就是初始化一个initialCapacity(前三种构造方法)大小的数组作为存储数据的空间，以及一个capacityIncrement作为需要对数组进行扩容时具体扩容大小，当capacityIncrement小于等于0是就是扩容一倍(当然正常的构造一个vector,capacityIncrement一定大于等于0)。<br>看到这里应该也大致理解了Vector其实和ArrayList底层设计上相当。</p>
+<h4 id="public方法介绍"><a href="#public方法介绍" class="headerlink" title="public方法介绍"></a>public方法介绍</h4><p>这其实是ArrayList和Vector的最大区别，Vector提供的public方法都用synchronized做了修饰，这意味着vector是线程安全的。</p>
+<ul>
+<li>copyInto(Object[] anArray)：复制vector中数据到anArray中。</li>
+<li>trimToSize()：缩减vector数组容量到最小所需容量。</li>
+<li>ensureCapacity(int minCapacity)：扩容容量到minCapacity。</li>
+<li>setSize(int newSize)：设置vector大小为newSize，如果newSize大于最小所需容量添加null元素。</li>
+<li>capacity()：返回vector的数组容量。</li>
+<li>size()：返回vector中数据个数。</li>
+<li>isEmpty()：判断vector数据个数是否为0.</li>
+<li>elements()：返回一个Enumeration实例。</li>
+<li>contains(Object o)：返回是否有匹配o的数据。</li>
+<li>indexOf(Object o)：返回第一个顺序匹配o的索引。</li>
+<li>indexOf(Object o, int index)：类似indexOf只是从index位置开始顺序匹配。</li>
+<li>lastIndexOf(Object o)：倒序的indexOf。</li>
+<li>lastIndexOf(Object o, int index)：倒序的indexOf(Object o, int index)。</li>
+<li>elementAt(int index)：返回index位置的数据。</li>
+<li>firstElement()：返回第一个数据。</li>
+<li>lastElement()：返回最后一个数据。</li>
+<li>setElementAt(E obj, int index)：将index位置的数据设置为obj。</li>
+<li>removeElementAt(int index)：删除index位置数据。</li>
+<li>insertElementAt(E obj, int index)：index位置插入数据obj原index以及后面数据后移一位。</li>
+<li>addElement(E obj)：vector末尾添加数据。</li>
+<li>removeElement(Object obj)：删除第一个顺序匹配obj位置的数据。</li>
+<li>removeAllElements()：vector中数据全部置为null。</li>
+<li>toArray()：返回一个复制了vector中数据的数组。</li>
+<li>toArray(T[] a)：将vector中数据复制到a中。</li>
+<li>get(int index)：获取index位置数据。</li>
+<li>set(int index, E element)：index位置数据设置为element。</li>
+<li>add(E e)：vector末尾添加数据，成功返回true。</li>
+<li>remove(Object o)：同removeElement(Object obj)。</li>
+<li>add(int index, E element)：同insertElementAt(E obj, int index)。</li>
+<li>remove(int index)：删除index位置数据并返回删除的数据。</li>
+<li>clear()：同removeAllElements()。</li>
+<li>containsAll(Collection&lt;?&gt; c)：查询vector中是否有集合c，顺序匹配。</li>
+<li>addAll(Collection&lt;? extends E&gt; c)：vector末尾添加集合c的所有数据。</li>
+<li>removeAll(Collection&lt;?&gt; c)：删除vector中和c重复的数据。</li>
+<li>retainAll(Collection&lt;?&gt; c)：删除vector中不存在于c的数据。</li>
+<li>addAll(int index, Collection&lt;? extends E&gt; c)：index位置添加c。</li>
+<li>subList(int fromIndex, int toIndex)：返回一个List数据是vector中索引fromIndex-toIndex。</li>
+<li>removeRange(int fromIndex, int toIndex)：删除fromIndex-toIndex范围中的数据</li>
+</ul>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>Vector提供了三个迭代器并且基本和ArrayList相似，分别是Itr，ListItr，VectorSpliterator。<br>另外通过elements方法返回的Enumeration实例也可以迭代。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public Enumeration&lt;E&gt; elements() &#123;</span><br><span class="line">    return new Enumeration&lt;E&gt;() &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line"></span><br><span class="line">        public boolean hasMoreElements() &#123;</span><br><span class="line">            return count &lt; elementCount;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public E nextElement() &#123;</span><br><span class="line">            synchronized (Vector.this) &#123;</span><br><span class="line">                if (count &lt; elementCount) &#123;</span><br><span class="line">                    return elementData(count++);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            throw new NoSuchElementException(&quot;Vector Enumeration&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Vector中用匿名内部类实现了Enumeration。</p>
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>某种意义上Vector其实可以理解成线程安全的ArrayList毕竟二者都是用数组存储数据提供的方法也大致相同。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/24/Java集合之Vector/" data-id="ckaxh3uwl000hykw76svrlqqy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/25/Java集合之HashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java集合之HashMap
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/24/Java中的Clone/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java中的Clone</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 13.33px;">基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/03/Java的枚举/">java的枚举</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之EnumMap/">Java集合之EnumMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/02/Java集合之HashSet/">Java集合之HashSet</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/25/Java集合之HashMap/">Java集合之HashMap</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/24/Java集合之Vector/">Java集合之Vector</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 HuangQiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
