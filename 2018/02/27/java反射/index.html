@@ -1,106 +1,140 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>java反射 | HQ BLOG</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
-<meta name="keywords" content="JAVA">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java反射">
-<meta property="og:url" content="http://yoursite.com/2018/02/27/java反射/index.html">
-<meta property="og:site_name" content="HQ BLOG">
-<meta property="og:description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T16:45:54.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java反射">
-<meta name="twitter:description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性">
-  
-    <link rel="alternate" href="/atom.xml" title="HQ BLOG" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>java反射 | HQ BLOG</title><meta name="description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性"><meta name="keywords" content="JAVA"><meta name="author" content="HuangQiang"><meta name="copyright" content="HuangQiang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2018/02/27/java%E5%8F%8D%E5%B0%84/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="java反射"><meta property="og:url" content="http://yoursite.com/2018/02/27/java%E5%8F%8D%E5%B0%84/"><meta property="og:site_name" content="HQ BLOG"><meta property="og:description" content="类型信息Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。 反射的使用首先获取class对象（在运行是，一个类只有一个class对象）：获取class对象三种方式  getClass方法（继承自object） 任何数据类型（包括基础数据类型）都有一个静态的class属性"><meta property="og:image" content="http://yoursite.com/null"><meta property="article:published_time" content="2018-02-27T09:02:32.000Z"><meta property="article:modified_time" content="2019-02-14T16:45:54.000Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '',
+  date_suffix: {"one_hour":"刚刚","hours":"小时前","day":"天前"},
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
 
-</head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">HQ BLOG</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-java反射" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/27/java反射/" class="article-date">
-  <time datetime="2018-02-27T09:02:32.000Z" itemprop="datePublished">2018-02-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      java反射
-    </h1>
-  
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+    },
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p>Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。</p>
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2019-02-15 00:45:54'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 5.1.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">32</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/Gallery"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.</span> <span class="toc-text">类型信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">反射的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%B9%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">反射获取构造方法并使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">反射获取成员变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E5%B9%B6%E8%B0%83"><span class="toc-number">3.</span> <span class="toc-text">获取成员方法并调&#96;&#96;</span></a></li></ol></div></div></div><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HQ BLOG</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/Gallery"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">java反射</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-02-27T09:02:32.000Z" title="发表于 2018-02-27 17:02:32">2018-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2019-02-14T16:45:54.000Z" title="更新于 2019-02-15 00:45:54">2019-02-15</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p>Java让我们在运行时识别对象和类的信息。主要有两种方式：一种是传统的RTTI，他假定我们在编译时已经知道了所有的类型信息；另一种是反射机制，它允许我们在运行时发现和使用类的信息。</p>
 <h2 id="反射的使用"><a href="#反射的使用" class="headerlink" title="反射的使用"></a>反射的使用</h2><p>首先获取class对象（在运行是，一个类只有一个class对象）：<br>获取class对象三种方式</p>
 <ol>
 <li>getClass方法（继承自object）</li>
 <li>任何数据类型（包括基础数据类型）都有一个静态的class属性</li>
 <li>通过Class类的静态方法：forName（String className）<br>以下上述方式的实现</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A a = new A();</span><br><span class="line">Class a1 = a.getClass();</span><br><span class="line"></span><br><span class="line">Class a2 = A.class;</span><br><span class="line"></span><br><span class="line">Class a3 = Class.forName(&quot;A的路径&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A a &#x3D; new A();</span><br><span class="line">Class a1 &#x3D; a.getClass();</span><br><span class="line"></span><br><span class="line">Class a2 &#x3D; A.class;</span><br><span class="line"></span><br><span class="line">Class a3 &#x3D; Class.forName(&quot;A的路径&quot;);</span><br></pre></td></tr></table></figure>
 <p>三种方法第一种已经有了类的对象不需要反射，第二种需要导入类的包，实用性差，所以通常用第三种方法。</p>
-<h3 id="反射获取构造方法并使用"><a href="#反射获取构造方法并使用" class="headerlink" title="反射获取构造方法并使用"></a>反射获取构造方法并使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a = Class.forName(&quot;A&quot;);</span><br><span class="line">//获取所有public构造方法</span><br><span class="line">Constructor[] conArray = a.getConstructors();</span><br><span class="line">//获取所有构造方法</span><br><span class="line">conArray = a.getDeclaredConstructors();</span><br><span class="line"></span><br><span class="line">//getConstructor方法的参数是想要获取的构造方法的参数类型</span><br><span class="line">//获取public构造方法且参数为null（无参）</span><br><span class="line">Constructor con = a.getConstructor(null);</span><br><span class="line">//获取参数数据类型为char的构造方法</span><br><span class="line">con = a.getDeclaredConstructor(char.class)</span><br><span class="line"></span><br><span class="line">//使用</span><br><span class="line">Object obj = con.newInstance(&quot; &quot;);</span><br></pre></td></tr></table></figure>
-<h3 id="反射获取成员变量"><a href="#反射获取成员变量" class="headerlink" title="反射获取成员变量"></a>反射获取成员变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a = Class.forName(&quot;A&quot;);</span><br><span class="line">//获取所有public字段</span><br><span class="line">Field[] fields = a.getFields();</span><br><span class="line">//获取所有字段</span><br><span class="line">fields = a.getDeclaredFields();</span><br><span class="line">//根据字段名获取public字段</span><br><span class="line">Field field = a.getField(&quot;Field&apos;s name&quot;);</span><br><span class="line">//根据字段名获取字段</span><br><span class="line">field = a.getDeclaredField(&quot;Field&apos;s name&quot;);</span><br><span class="line">//设置字段值</span><br><span class="line">Object obj = a.getConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">f.setAccessible(true);//暴力反射，解除私有锁定</span><br><span class="line">field.set(obj,&quot;abc&quot;);</span><br></pre></td></tr></table></figure>
-<h2 id="获取成员方法并调"><a href="#获取成员方法并调" class="headerlink" title="获取成员方法并调"></a>获取成员方法并调<code></code></h2><p>Class a = Class.forName(“A”);<br>//获取所有public方法<br>Method[] methods = a.getMethods();<br>//获取所有方法<br>methods = a.getDeclaredMethods();<br>//根据方法名和方法参数类型（例如String）获取public方法<br>Method method = a.getMethod(“Method’s name”,String.class)<br>//获取方法不限public<br>method = a.getDeclaredMethod(“Method’s name”,String.class)<br>//调用<br>Object obj = a.getConstructor().newInstance();<br>method.setAccessible(true);//解除私有锁定<br>method.invoke(obj,” “);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### java反射的具体实现</span><br><span class="line">最近在一次笔试中被要求通过反射改变System类中的SecurityManager值，突然发现这个值无法反射获取，因此对java反射有了更新的认识。</span><br></pre></td></tr></table></figure></p>
+<h3 id="反射获取构造方法并使用"><a href="#反射获取构造方法并使用" class="headerlink" title="反射获取构造方法并使用"></a>反射获取构造方法并使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a &#x3D; Class.forName(&quot;A&quot;);</span><br><span class="line">&#x2F;&#x2F;获取所有public构造方法</span><br><span class="line">Constructor[] conArray &#x3D; a.getConstructors();</span><br><span class="line">&#x2F;&#x2F;获取所有构造方法</span><br><span class="line">conArray &#x3D; a.getDeclaredConstructors();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;getConstructor方法的参数是想要获取的构造方法的参数类型</span><br><span class="line">&#x2F;&#x2F;获取public构造方法且参数为null（无参）</span><br><span class="line">Constructor con &#x3D; a.getConstructor(null);</span><br><span class="line">&#x2F;&#x2F;获取参数数据类型为char的构造方法</span><br><span class="line">con &#x3D; a.getDeclaredConstructor(char.class)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用</span><br><span class="line">Object obj &#x3D; con.newInstance(&quot; &quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="反射获取成员变量"><a href="#反射获取成员变量" class="headerlink" title="反射获取成员变量"></a>反射获取成员变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class a &#x3D; Class.forName(&quot;A&quot;);</span><br><span class="line">&#x2F;&#x2F;获取所有public字段</span><br><span class="line">Field[] fields &#x3D; a.getFields();</span><br><span class="line">&#x2F;&#x2F;获取所有字段</span><br><span class="line">fields &#x3D; a.getDeclaredFields();</span><br><span class="line">&#x2F;&#x2F;根据字段名获取public字段</span><br><span class="line">Field field &#x3D; a.getField(&quot;Field&#39;s name&quot;);</span><br><span class="line">&#x2F;&#x2F;根据字段名获取字段</span><br><span class="line">field &#x3D; a.getDeclaredField(&quot;Field&#39;s name&quot;);</span><br><span class="line">&#x2F;&#x2F;设置字段值</span><br><span class="line">Object obj &#x3D; a.getConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">f.setAccessible(true);&#x2F;&#x2F;暴力反射，解除私有锁定</span><br><span class="line">field.set(obj,&quot;abc&quot;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取成员方法并调"><a href="#获取成员方法并调" class="headerlink" title="获取成员方法并调``"></a>获取成员方法并调``</h2><p>Class a = Class.forName(“A”);<br>//获取所有public方法<br>Method[] methods = a.getMethods();<br>//获取所有方法<br>methods = a.getDeclaredMethods();<br>//根据方法名和方法参数类型（例如String）获取public方法<br>Method method = a.getMethod(“Method’s name”,String.class)<br>//获取方法不限public<br>method = a.getDeclaredMethod(“Method’s name”,String.class)<br>//调用<br>Object obj = a.getConstructor().newInstance();<br>method.setAccessible(true);//解除私有锁定<br>method.invoke(obj,” “);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### java反射的具体实现</span><br><span class="line">最近在一次笔试中被要求通过反射改变System类中的SecurityManager值，突然发现这个值无法反射获取，因此对java反射有了更新的认识。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>public class Test{<br>    public static void main(String[] args){</p>
-<pre><code>    try {
+<pre><code>    try &#123;
         Class clazz = Class.forName(&quot;testProxy&quot;);
         Constructor constructor = clazz.getDeclaredConstructor(String.class);
         testProxy proxy = (testProxy) constructor.newInstance(&quot;test&quot;);
@@ -109,96 +143,97 @@
         field.set(proxy,&quot;after change&quot;);
         Method method = clazz.getDeclaredMethod(&quot;getString&quot;);
         System.out.println(method.invoke(proxy));
-    } catch (ClassNotFoundException | NoSuchMethodException e) {
+    &#125; catch (ClassNotFoundException | NoSuchMethodException e) &#123;
         e.printStackTrace();
-    } catch (IllegalAccessException e) {
+    &#125; catch (IllegalAccessException e) &#123;
         e.printStackTrace();
-    } catch (InstantiationException e) {
+    &#125; catch (InstantiationException e) &#123;
         e.printStackTrace();
-    } catch (InvocationTargetException e) {
+    &#125; catch (InvocationTargetException e) &#123;
         e.printStackTrace();
-    } catch (NoSuchFieldException e) {
+    &#125; catch (NoSuchFieldException e) &#123;
         e.printStackTrace();
-    }
-}
-</code></pre><p>}</p>
+    &#125;
+&#125;</code></pre>
+<p>}</p>
 <p>class testProxy{<br>    private String str;</p>
-<pre><code>testProxy(String str){
+<pre><code>testProxy(String str)&#123;
     this.str = str;
-}
+&#125;
 
-String getString(){
+String getString()&#123;
     return this.str;
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">反射的第一步就是获取一个Class对象实例。Class是一个类在载入JVM之后，Class对象记录了一个类的类型信息。</span><br><span class="line"></span><br><span class="line">#### 反射获取构造函数</span><br></pre></td></tr></table></figure></p>
+&#125;</code></pre>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">反射的第一步就是获取一个Class对象实例。Class是一个类在载入JVM之后，Class对象记录了一个类的类型信息。</span><br><span class="line"></span><br><span class="line">#### 反射获取构造函数</span><br></pre></td></tr></table></figure>
 <pre><code>public Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)
-    throws NoSuchMethodException, SecurityException {
+    throws NoSuchMethodException, SecurityException &#123;
     checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);
     return getConstructor0(parameterTypes, Member.DECLARED);
-}
+&#125;
 
-private void checkMemberAccess(int which, Class&lt;?&gt; caller, boolean checkProxyInterfaces) {
+private void checkMemberAccess(int which, Class&lt;?&gt; caller, boolean checkProxyInterfaces) &#123;
     final SecurityManager s = System.getSecurityManager();
-    if (s != null) {
-        /* Default policy allows access to all {@link Member#PUBLIC} members,
+    if (s != null) &#123;
+        /* Default policy allows access to all &#123;@link Member#PUBLIC&#125; members,
          * as well as access to classes that have the same class loader as the caller.
          * In all other cases, it requires RuntimePermission(&quot;accessDeclaredMembers&quot;)
          * permission.
          */
         final ClassLoader ccl = ClassLoader.getClassLoader(caller);
         final ClassLoader cl = getClassLoader0();
-        if (which != Member.PUBLIC) {
-            if (ccl != cl) {
+        if (which != Member.PUBLIC) &#123;
+            if (ccl != cl) &#123;
                 s.checkPermission(SecurityConstants.CHECK_MEMBER_ACCESS_PERMISSION);
-            }
-        }
+            &#125;
+        &#125;
         this.checkPackageAccess(ccl, checkProxyInterfaces);
-    }
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据参数获取一个类的构造函数的过程中首先调用checkMemberAccess这个方法，checkMemberAccess的作用是在访问的Member不是public且调用者和这个类不是同一个加载器的时候验证是否有Member访问权限。获取反射类的所有构造函数的具体实现是如下代码：</span><br></pre></td></tr></table></figure>
+    &#125;
+&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据参数获取一个类的构造函数的过程中首先调用checkMemberAccess这个方法，checkMemberAccess的作用是在访问的Member不是public且调用者和这个类不是同一个加载器的时候验证是否有Member访问权限。获取反射类的所有构造函数的具体实现是如下代码：</span><br></pre></td></tr></table></figure>
 <pre><code>private Constructor&lt;T&gt; getConstructor0(Class&lt;?&gt;[] parameterTypes,
                                     int which) throws NoSuchMethodException
-{
+&#123;
     //获取构造函数对象数组
     Constructor&lt;T&gt;[] constructors = privateGetDeclaredConstructors((which == Member.PUBLIC));
-    for (Constructor&lt;T&gt; constructor : constructors) {
+    for (Constructor&lt;T&gt; constructor : constructors) &#123;
         //如果参数正确匹配就返回constructor的拷贝
         if (arrayContentsEq(parameterTypes,
-                            constructor.getParameterTypes())) {
+                            constructor.getParameterTypes())) &#123;
             return getReflectionFactory().copyConstructor(constructor);
-        }
-    }
+        &#125;
+    &#125;
     throw new NoSuchMethodException(getName() + &quot;.&lt;init&gt;&quot; + argumentTypesToString(parameterTypes));
-}
+&#125;
 
-private Constructor&lt;T&gt;[] privateGetDeclaredConstructors(boolean publicOnly) {
+private Constructor&lt;T&gt;[] privateGetDeclaredConstructors(boolean publicOnly) &#123;
     //检查system properties是否初始化
     checkInitted();
     Constructor&lt;T&gt;[] res;
     ReflectionData&lt;T&gt; rd = reflectionData();
     //如果从缓存中获取到reflectionData
-    if (rd != null) {
+    if (rd != null) &#123;
         res = publicOnly ? rd.publicConstructors : rd.declaredConstructors;
         if (res != null) return res;
-    }
+    &#125;
     // No cached value available; request value from VM
     //如果是一个接口返回新建一个空Constructor否则从jvm获取
-    if (isInterface()) {
+    if (isInterface()) &#123;
         @SuppressWarnings(&quot;unchecked&quot;)
         Constructor&lt;T&gt;[] temporaryRes = (Constructor&lt;T&gt;[]) new Constructor&lt;?&gt;[0];
         res = temporaryRes;
-    } else {
+    &#125; else &#123;
         res = getDeclaredConstructors0(publicOnly);
-    }
-    if (rd != null) {
-        if (publicOnly) {
+    &#125;
+    if (rd != null) &#123;
+        if (publicOnly) &#123;
             rd.publicConstructors = res;
-        } else {
+        &#125; else &#123;
             rd.declaredConstructors = res;
-        }
-    }
+        &#125;
+    &#125;
     return res;
-}
+&#125;
 
 private volatile transient SoftReference&lt;ReflectionData&lt;T&gt;&gt; reflectionData;
 
@@ -206,44 +241,44 @@ private volatile transient SoftReference&lt;ReflectionData&lt;T&gt;&gt; reflecti
 // that redefines this class or a superclass.
 private volatile transient int classRedefinedCount = 0;
 
-private ReflectionData&lt;T&gt; reflectionData() {
+private ReflectionData&lt;T&gt; reflectionData() &#123;
     SoftReference&lt;ReflectionData&lt;T&gt;&gt; reflectionData = this.reflectionData;
     int classRedefinedCount = this.classRedefinedCount;
     ReflectionData&lt;T&gt; rd;
     if (useCaches &amp;&amp;
         reflectionData != null &amp;&amp;
         (rd = reflectionData.get()) != null &amp;&amp;
-        rd.redefinedCount == classRedefinedCount) {
+        rd.redefinedCount == classRedefinedCount) &#123;
         return rd;
-    }
+    &#125;
     // else no SoftReference or cleared SoftReference or stale ReflectionData
     // -&gt; create and replace new instance
     return newReflectionData(reflectionData, classRedefinedCount);
-}
+&#125;
 
 private ReflectionData&lt;T&gt; newReflectionData(SoftReference&lt;ReflectionData&lt;T&gt;&gt; oldReflectionData,
-                                            int classRedefinedCount) {
+                                            int classRedefinedCount) &#123;
     if (!useCaches) return null;
 
-    while (true) {
+    while (true) &#123;
         ReflectionData&lt;T&gt; rd = new ReflectionData&lt;&gt;(classRedefinedCount);
         // try to CAS it...
         //尝试用CAS自旋获取reflectionData
-        if (Atomic.casReflectionData(this, oldReflectionData, new SoftReference&lt;&gt;(rd))) {
+        if (Atomic.casReflectionData(this, oldReflectionData, new SoftReference&lt;&gt;(rd))) &#123;
             return rd;
-        }
+        &#125;
         // else retry
         oldReflectionData = this.reflectionData;
         classRedefinedCount = this.classRedefinedCount;
         if (oldReflectionData != null &amp;&amp;
             (rd = oldReflectionData.get()) != null &amp;&amp;
-            rd.redefinedCount == classRedefinedCount) {
+            rd.redefinedCount == classRedefinedCount) &#123;
             return rd;
-        }
-    }
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">从上述代码中可见通过反射获取一个类的构造函数主要是从ReflectionData中获取，ReflectionData是Class类中的静态内部类。</span><br></pre></td></tr></table></figure>
-<pre><code>private static class ReflectionData&lt;T&gt; {
+        &#125;
+    &#125;
+&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">从上述代码中可见通过反射获取一个类的构造函数主要是从ReflectionData中获取，ReflectionData是Class类中的静态内部类。</span><br></pre></td></tr></table></figure>
+<pre><code>private static class ReflectionData&lt;T&gt; &#123;
     volatile Field[] declaredFields;
     volatile Field[] publicFields;
     volatile Method[] declaredMethods;
@@ -258,197 +293,66 @@ private ReflectionData&lt;T&gt; newReflectionData(SoftReference&lt;ReflectionDat
     // Value of classRedefinedCount when we created this ReflectionData instance
     final int redefinedCount;
 
-    ReflectionData(int redefinedCount) {
+    ReflectionData(int redefinedCount) &#123;
         this.redefinedCount = redefinedCount;
-    }
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ReflectionData类也很简单里面存放的都是平时反射获取的数据。</span><br><span class="line"></span><br><span class="line">#### 反射获取Filed</span><br></pre></td></tr></table></figure>
+    &#125;
+&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ReflectionData类也很简单里面存放的都是平时反射获取的数据。</span><br><span class="line"></span><br><span class="line">#### 反射获取Filed</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <pre><code>public Field getDeclaredField(String name)
-    throws NoSuchFieldException, SecurityException {
+    throws NoSuchFieldException, SecurityException &#123;
     checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);
     Field field = searchFields(privateGetDeclaredFields(false), name);
-    if (field == null) {
+    if (field == null) &#123;
         throw new NoSuchFieldException(name);
-    }
+    &#125;
     return field;
-}
+&#125;
 
-private Field[] privateGetDeclaredFields(boolean publicOnly) {
+private Field[] privateGetDeclaredFields(boolean publicOnly) &#123;
     checkInitted();
     Field[] res;
     ReflectionData&lt;T&gt; rd = reflectionData();
-    if (rd != null) {
+    if (rd != null) &#123;
         res = publicOnly ? rd.declaredPublicFields : rd.declaredFields;
         if (res != null) return res;
-    }
+    &#125;
     // No cached value available; request value from VM
     res = Reflection.filterFields(this, getDeclaredFields0(publicOnly));
-    if (rd != null) {
-        if (publicOnly) {
+    if (rd != null) &#123;
+        if (publicOnly) &#123;
             rd.declaredPublicFields = res;
-        } else {
+        &#125; else &#123;
             rd.declaredFields = res;
-        }
-    }
+        &#125;
+    &#125;
     return res;
-}
+&#125;
 
-private static Field searchFields(Field[] fields, String name) {
+private static Field searchFields(Field[] fields, String name) &#123;
     String internedName = name.intern();
-    for (int i = 0; i &lt; fields.length; i++) {
-        if (fields[i].getName() == internedName) {
+    for (int i = 0; i &lt; fields.length; i++) &#123;
+        if (fields[i].getName() == internedName) &#123;
             return getReflectionFactory().copyField(fields[i]);
-        }
-    }
+        &#125;
+    &#125;
     return null;
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">反射获取Field和获取constructor的方法类似不过可以看到在无法从缓存获取有效数据时前者的操作是res = Reflection.filterFields(this, getDeclaredFields0(publicOnly))，这一步就是前面字段获取不到的原因，在这里调用了Reflection的filterFields方法</span><br></pre></td></tr></table></figure>
+&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">反射获取Field和获取constructor的方法类似不过可以看到在无法从缓存获取有效数据时前者的操作是res &#x3D; Reflection.filterFields(this, getDeclaredFields0(publicOnly))，这一步就是前面字段获取不到的原因，在这里调用了Reflection的filterFields方法</span><br></pre></td></tr></table></figure>
 <pre><code>private static volatile Map&lt;Class&lt;?&gt;, String[]&gt; fieldFilterMap;
 private static volatile Map&lt;Class&lt;?&gt;, String[]&gt; methodFilterMap;
 
-static {
+static &#123;
     HashMap var0 = new HashMap();
-    var0.put(Reflection.class, new String[]{&quot;fieldFilterMap&quot;, &quot;methodFilterMap&quot;});
-    var0.put(System.class, new String[]{&quot;security&quot;});
-    var0.put(Class.class, new String[]{&quot;classLoader&quot;});
+    var0.put(Reflection.class, new String[]&#123;&quot;fieldFilterMap&quot;, &quot;methodFilterMap&quot;&#125;);
+    var0.put(System.class, new String[]&#123;&quot;security&quot;&#125;);
+    var0.put(Class.class, new String[]&#123;&quot;classLoader&quot;&#125;);
     fieldFilterMap = var0;
     methodFilterMap = new HashMap();
-}
-</code></pre><p><code>`</code><br>Reflection中有这样两个Map：fieldFilterMap，methodFilterMap它们会对反射的结果做一层拦截，拦截一些类中不想让反射获取的字段，可以看到System类的security就在里面。</p>
-<h4 id="Method获取"><a href="#Method获取" class="headerlink" title="Method获取"></a>Method获取</h4><p>Method获取基本和Field一样只是从ReflectionData获取不同数据罢了。</p>
+&#125;</code></pre>
+<pre><code>Reflection中有这样两个Map：fieldFilterMap，methodFilterMap它们会对反射的结果做一层拦截，拦截一些类中不想让反射获取的字段，可以看到System类的security就在里面。
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/27/java反射/" data-id="ckaxhdrru001ln8w7tngyy4og" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+#### Method获取
+Method获取基本和Field一样只是从ReflectionData获取不同数据罢了。
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/02/27/正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          正则表达式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/01/02/Spring-aop/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Spring-aop</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-Spring/">JAVA Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring/">Java Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-JAVA/">Spring JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 20px;">JAVA</a> <a href="/tags/JAVA-Spring/" style="font-size: 10px;">JAVA Spring</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Java-Spring/" style="font-size: 10px;">Java Spring</a> <a href="/tags/Spring-JAVA/" style="font-size: 10px;">Spring JAVA</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/基础/" style="font-size: 13.33px;">基础</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/02/03/Java的枚举/">java的枚举</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/02/Java集合之EnumMap/">Java集合之EnumMap</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/02/Java集合之HashSet/">Java集合之HashSet</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/25/Java集合之HashMap/">Java集合之HashMap</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/24/Java集合之Vector/">Java集合之Vector</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 HuangQiang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-  </div>
-</body>
-</html>
+</code></pre>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">HuangQiang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/02/27/java%E5%8F%8D%E5%B0%84/">http://yoursite.com/2018/02/27/java%E5%8F%8D%E5%B0%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">HQ BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JAVA/">JAVA</a></div><div class="post_share"><div class="social-share" data-image="/null" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2018/02/27/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><img class="prev-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">正则表达式</div></div></a></div><div class="next-post pull-right"><a href="/2018/01/02/Spring-aop/"><img class="next-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spring-aop</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2017/10/20/JAVA代理/" title="JAVA代理"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-10-20</div><div class="title">JAVA代理</div></div></a></div><div><a href="/2019/01/24/Java中的Clone/" title="Java中的Clone"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-24</div><div class="title">Java中的Clone</div></div></a></div><div><a href="/2019/01/23/Java函数式编程/" title="Java函数式编程"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-23</div><div class="title">Java函数式编程</div></div></a></div><div><a href="/2019/02/03/Java的枚举/" title="java的枚举"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-02-03</div><div class="title">java的枚举</div></div></a></div><div><a href="/2019/01/24/Java集合之LinkedList/" title="Java集合之LinkedList"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-24</div><div class="title">Java集合之LinkedList</div></div></a></div><div><a href="/2019/01/24/Java集合之Vector/" title="Java集合之Vector"><img class="cover" src="/null"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-24</div><div class="title">Java集合之Vector</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By HuangQiang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, this is hq's blog</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
